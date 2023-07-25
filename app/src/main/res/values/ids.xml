@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="researchgate" type="id" />
+    <item name="Github1" type="id" />
+    <item name="textView2" type="id" />
+    <item name="imageView3" type="id" />
+    <item name="Instagram" type="id" />
+    <item name="Linkedin" type="id" />
+    <item name="imageView2" type="id" />
+    <item name="Github" type="id" />
+    <item name="textView" type="id" />
+    <item name="indietro" type="id" />
+</resources>

@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Save That Bridge</string>
+    <string name="title">Attenzione!</string>
+    <string name="message">Sei sicuro di voler uscire?</string>
+</resources>

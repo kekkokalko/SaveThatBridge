@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="worldXMax">15</integer>
+    <integer name="worldXMin">-15</integer>
+    <integer name="worldYMax">10</integer>
+    <integer name="worldYMin">-10</integer>
+    <integer name="frameBufferHeight">400</integer>
+    <integer name="frameBufferWidth">600</integer>
+</resources>
