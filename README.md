@@ -20,8 +20,8 @@ E' stata usufruita la libreria [JLiquidFun](https://github.com/mfaella/JLiquidFu
 
 
 ### Team
-Designer: [Francesco Calcopietro](https://github.com/kekkokalko)
-Supervisor: Prof. [Marco Faella](https://github.com/mfaella)
+-Designer: [Francesco Calcopietro](https://github.com/kekkokalko)
+-Supervisor: Prof. [Marco Faella](https://github.com/mfaella)
 
 Anno Accademico 2022/2023
 
