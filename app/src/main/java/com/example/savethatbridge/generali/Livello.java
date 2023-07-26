@@ -3,10 +3,7 @@ package com.example.savethatbridge.generali;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
-import android.view.View;
-import android.widget.Button;
-import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
+import android.util.Log;
 
 import com.example.savethatbridge.R;
 import com.example.savethatbridge.gameobjects.Aggancio;
@@ -20,6 +17,7 @@ import com.example.savethatbridge.gameobjects.Terrorista;
 
 
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Livello {
 
@@ -28,6 +26,7 @@ public class Livello {
     private final float altezzaAggancio;
     private Context context;
     private MediaPlayer mediaPlayer;
+    private Random random= new Random();
 
     enum Livelli{
         Livello_1,
@@ -199,18 +198,26 @@ public class Livello {
     {
         float larghezzaAggancio= lunghezzaPonte/numeroAgganci;
         MyRevoluteJoint joint;
+        ArrayList<Integer> random_joint= new ArrayList<Integer>(2);
         if(numeroBombe==1) {
-            joint = GameWorld.joint.get(3);
+            random_joint.add(random.nextInt(5));
+            Log.d("Messa", "E' stato scelto il numero" + random_joint.get(0));
+            joint = GameWorld.joint.get(random_joint.get(0));
             Bomba bomba = new Bomba(this.context, gameWorld, joint.getJoint().getBodyB().getPositionX() - larghezzaAggancio / 2, (joint.getJoint().getBodyB().getPositionY() + altezzaAggancio / 2), joint);
             GameWorld.aggiungiBomba(bomba);
         }
         else{
-            joint=GameWorld.joint.get(1);
-            Bomba bomba = new Bomba(this.context, gameWorld, joint.getJoint().getBodyB().getPositionX() - larghezzaAggancio / 2, (joint.getJoint().getBodyB().getPositionY() + altezzaAggancio / 2), joint);
-            GameWorld.aggiungiBomba(bomba);
-            joint = GameWorld.joint.get(2);
-            bomba = new Bomba(this.context, gameWorld, joint.getJoint().getBodyB().getPositionX() - larghezzaAggancio / 2, (joint.getJoint().getBodyB().getPositionY() + altezzaAggancio / 2), joint);
-            GameWorld.aggiungiBomba(bomba);
+            for(int i=0;i<numeroBombe;i++){
+                random_joint.add(i,random.nextInt(5));
+                Log.d("Messa", "E' stato scelto il numero" + random_joint.get(0));
+                while(i>0 && random_joint.get(i)==random_joint.get(i-1)){
+                    random_joint.add(i,random.nextInt(5));
+                    Log.d("Messa", "E' stato scelto il numero" + random_joint.get(0));
+                }
+                joint = GameWorld.joint.get(random_joint.get(i));
+                Bomba bomba = new Bomba(this.context, gameWorld, joint.getJoint().getBodyB().getPositionX() - larghezzaAggancio / 2, (joint.getJoint().getBodyB().getPositionY() + altezzaAggancio / 2), joint);
+                GameWorld.aggiungiBomba(bomba);
+            }
         }
     }
 }

@@ -39,7 +39,7 @@ public class Particelle extends GameObject {
 
         CircleShape circleShape = new CircleShape();
         circleShape.setRadius(2);
-        circleShape.setPosition(x, y-2);
+        circleShape.setPosition(x, y);
 
         ParticleGroupDef particleGroupDef = new ParticleGroupDef();
         particleGroupDef.setShape(circleShape);
