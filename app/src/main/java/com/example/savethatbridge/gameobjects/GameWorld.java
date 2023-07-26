@@ -41,7 +41,6 @@ public class GameWorld {
     private static float altezzaAggancio;
     private Bitmap bitmap;
 
-    private static int level = 0;
     private World world;
     private final RectF dest;
     private final TouchConsumer touchConsumer;

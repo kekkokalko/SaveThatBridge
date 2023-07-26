@@ -100,6 +100,8 @@ public class Livello {
     private void aggiungiCaratteristiche(GameWorld world) {
         mediaPlayer=MediaPlayer.create(this.context,R.raw.applausi);
         mediaPlayer.start();
+        Interfaccia interfaccia= new Interfaccia(world);
+        world.aggiungiOggetto(interfaccia);
     }
 
     /**Setup del background del livello**/
@@ -131,10 +133,14 @@ public class Livello {
         Interfaccia interfaccia= new Interfaccia(world);
         interfaccia.setContatoreLivello(GameWorld.getLivello());
         interfaccia.setContatoreTravi(GameWorld.getNumeroTravi());
-        if(GameWorld.getLivello()==1)
+        if(GameWorld.getLivello()==1){
             interfaccia.setTimer(-1);
-        else
+            Interfaccia.score.add(0,100f);
+        }
+        else{
             interfaccia.setTimer(10);
+            Interfaccia.score.add(1,100f);
+        }
         world.aggiungiOggetto(interfaccia);
     }
 

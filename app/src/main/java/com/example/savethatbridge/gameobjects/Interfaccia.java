@@ -8,12 +8,16 @@ import android.graphics.Paint;
 import com.google.fpl.liquidfun.BodyDef;
 import com.google.fpl.liquidfun.BodyType;
 
+import java.util.ArrayList;
+import java.util.Timer;
+
 public class Interfaccia extends GameObject{
     private final Canvas canvas;
     private final Paint paint;
     private static int contatoreTravi=0;
     private static int contatoreLivello=0;
-    private static int timer = -1;
+    private static float timer = -1;
+    public static ArrayList<Float> score= new ArrayList<Float>(2);
 
     public Interfaccia(GameWorld gameWorld) {
         super(gameWorld);
@@ -33,8 +37,10 @@ public class Interfaccia extends GameObject{
 
         if(GameWorld.getLivello()==1)
             this.paint.setColor(Color.BLACK);
-        else
+        else if(GameWorld.getLivello()==2)
             this.paint.setColor(Color.YELLOW);
+        else
+            this.paint.setColor(Color.WHITE);
         this.paint.setStyle(Paint.Style.FILL_AND_STROKE);
         this.paint.setTextSize(20);
         this.paint.setTextAlign(Paint.Align.CENTER);
@@ -43,12 +49,13 @@ public class Interfaccia extends GameObject{
     public static void setContatoreLivello(int livello){ contatoreLivello=livello;}
     public static void setContatoreTravi(int contatore){ contatoreTravi=contatore;}
     public static void decrementaContatoreTravi(){ contatoreTravi--;}
-    public static void setTimer(int t){timer=t;}
+    public static void setTimer(float t){timer=t;}
     public static void decrementaTimer(){
         if(timer>0)
             timer--;
     }
-    public static int getTimer(){ return timer;}
+    public static float getTimer(){ return timer;}
+    public synchronized static void setScore(int index,float timer){ score.set(index,score.get(index)+timer);}
 
     @Override
     public void draw(Bitmap buf, float x, float y, float angle) {
@@ -57,7 +64,12 @@ public class Interfaccia extends GameObject{
         if(GameWorld.getLivello()<=2) {
             this.canvas.drawText("Travi rimanenti : " + contatoreTravi, this.gw.getScreenSize().getxMax() / 28, this.gw.getScreenSize().getyMax() / 28, paint);
             this.canvas.drawText("Livello : " + contatoreLivello, this.gw.getScreenSize().getxMax() / 8, this.gw.getScreenSize().getyMax() / 28, paint);
-            this.canvas.drawText("Tempo rimamente : " + ((timer >= 0) ? timer + "s" : "0"), (float) (this.gw.getScreenSize().getxMax() / 4.5), this.gw.getScreenSize().getyMax() / 28, paint);
+            this.canvas.drawText("Tempo rimamente : " + ((timer >= 0) ? timer + "s" : "0"), (float) (this.gw.getScreenSize().getxMax() / 4.7f), this.gw.getScreenSize().getyMax() / 28, paint);
+            this.canvas.drawText("Score : " + score.get(contatoreLivello-1), this.gw.getScreenSize().getxMax() / 38, this.gw.getScreenSize().getyMax() / 18, paint);
+        }
+        else{
+            this.canvas.drawText("Score 1° livello: " + score.get(0), this.gw.getScreenSize().getxMax() / 24, this.gw.getScreenSize().getyMax()/2.8f, paint);
+            this.canvas.drawText("Score 2° livello: " + score.get(1), this.gw.getScreenSize().getxMax() / 24, this.gw.getScreenSize().getyMax()/2.6f , paint);
         }
         this.canvas.restore();
     }

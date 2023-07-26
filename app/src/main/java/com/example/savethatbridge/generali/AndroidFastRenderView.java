@@ -141,8 +141,9 @@ public class AndroidFastRenderView extends SurfaceView implements Runnable {
             decrementaTimer=true;
             inizioGioco=false;
         }
-        if(decrementaTimer && fpsDeltaTime >1){
+        if(decrementaTimer && GameWorld.getLivello()==2 && fpsDeltaTime >1){
             Interfaccia.decrementaTimer();
+            Interfaccia.setScore(GameWorld.getLivello()-1,-1);
             if(Interfaccia.getTimer()==0)
                 fineGioco=true;
         }
@@ -201,6 +202,7 @@ public class AndroidFastRenderView extends SurfaceView implements Runnable {
     private void checkTimer(float fpsDelatTime){
         if(tempoDiCheckScaduto && fpsDelatTime>1){
             tempoDiGioco++;
+            Interfaccia.setScore(GameWorld.getLivello()-1,-1);
             if(tempoDiGioco==10){
                 tempoDiCheckScaduto=false;
                 verificaVittoria=true;
