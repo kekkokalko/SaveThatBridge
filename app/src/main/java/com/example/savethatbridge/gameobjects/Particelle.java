@@ -23,7 +23,7 @@ public class Particelle extends GameObject {
     private final byte[] posizioneParticelle;
     private final ByteBuffer posizioneParticelleBuffer;
     private final Paint paint = new Paint();
-    private static final int PARTICLE_BYTES = 8;
+    private static final int PARTICLE_BYTES = 256;
     private static int BUFFER_OFFSET;
     private static boolean isLittleEndian;
 
@@ -39,7 +39,7 @@ public class Particelle extends GameObject {
 
         CircleShape circleShape = new CircleShape();
         circleShape.setRadius(2);
-        circleShape.setPosition(x, y);
+        circleShape.setPosition(x+2, y);
 
         ParticleGroupDef particleGroupDef = new ParticleGroupDef();
         particleGroupDef.setShape(circleShape);

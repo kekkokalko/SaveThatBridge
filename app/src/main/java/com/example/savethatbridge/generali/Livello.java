@@ -200,24 +200,24 @@ public class Livello {
         MyRevoluteJoint joint;
         ArrayList<Integer> random_joint= new ArrayList<Integer>(2);
         if(numeroBombe==1) {
-            random_joint.add(random.nextInt(5));
-            Log.d("Messa", "E' stato scelto il numero" + random_joint.get(0));
+            random_joint.add(0,random.nextInt(5));
             joint = GameWorld.joint.get(random_joint.get(0));
             Bomba bomba = new Bomba(this.context, gameWorld, joint.getJoint().getBodyB().getPositionX() - larghezzaAggancio / 2, (joint.getJoint().getBodyB().getPositionY() + altezzaAggancio / 2), joint);
             GameWorld.aggiungiBomba(bomba);
         }
         else{
-            for(int i=0;i<numeroBombe;i++){
-                random_joint.add(i,random.nextInt(5));
-                Log.d("Messa", "E' stato scelto il numero" + random_joint.get(0));
-                while(i>0 && random_joint.get(i)==random_joint.get(i-1)){
-                    random_joint.add(i,random.nextInt(5));
-                    Log.d("Messa", "E' stato scelto il numero" + random_joint.get(0));
-                }
-                joint = GameWorld.joint.get(random_joint.get(i));
-                Bomba bomba = new Bomba(this.context, gameWorld, joint.getJoint().getBodyB().getPositionX() - larghezzaAggancio / 2, (joint.getJoint().getBodyB().getPositionY() + altezzaAggancio / 2), joint);
-                GameWorld.aggiungiBomba(bomba);
-            }
+            random_joint.add(0,random.nextInt(5));
+            if(random_joint.get(0).equals(4))
+                random_joint.set(0,3);
+            random_joint.add(1,random.nextInt(5));
+            while(random_joint.get(1)<=random_joint.get(0))
+                random_joint.add(1,random.nextInt(5));
+            joint = GameWorld.joint.get(random_joint.get(0));
+            Bomba bomba = new Bomba(this.context, gameWorld, joint.getJoint().getBodyB().getPositionX() - larghezzaAggancio / 2, (joint.getJoint().getBodyB().getPositionY() + altezzaAggancio / 2), joint);
+            GameWorld.aggiungiBomba(bomba);
+            joint = GameWorld.joint.get(random_joint.get(1));
+            bomba = new Bomba(this.context, gameWorld, joint.getJoint().getBodyB().getPositionX() - larghezzaAggancio / 2, (joint.getJoint().getBodyB().getPositionY() + altezzaAggancio / 2), joint);
+            GameWorld.aggiungiBomba(bomba);
         }
     }
 }

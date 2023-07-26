@@ -28,7 +28,7 @@ public class Bomba extends GameObject{
         super(gameWorld);
 
         this.context=context;
-        this.x=x;
+        this.x=x-1;
         this.y=y;
 
         this.canvas = new Canvas(gameWorld.getBitmapBuffer());
