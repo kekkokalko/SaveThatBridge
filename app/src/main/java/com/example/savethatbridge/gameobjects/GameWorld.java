@@ -65,7 +65,7 @@ public class GameWorld {
     public static ArrayList<GameObject> ponte= new ArrayList<>();
 
     //Particelle
-    private final ParticleSystem particleSystem;
+    private final ArrayList<ParticleSystem> particleSystem= new ArrayList<>();
 
     //Joint
     public static ArrayList<MyRevoluteJoint> joint= new ArrayList<>();
@@ -114,9 +114,15 @@ public class GameWorld {
         //Settaggio sistema di particelle
         ParticleSystemDef particleSystemDef = new ParticleSystemDef();
         particleSystemDef.setDestroyByAge(true);
-        this.particleSystem = this.world.createParticleSystem(particleSystemDef);
-        this.particleSystem.setRadius(0.3f);
-        this.particleSystem.setMaxParticleCount(1000);
+        this.particleSystem.add(this.world.createParticleSystem(particleSystemDef));
+        this.particleSystem.get(0).setRadius(0.2f);
+        this.particleSystem.get(0).setMaxParticleCount(200);
+        particleSystemDef.delete();
+        particleSystemDef = new ParticleSystemDef();
+        particleSystemDef.setDestroyByAge(true);
+        this.particleSystem.add(this.world.createParticleSystem(particleSystemDef));
+        this.particleSystem.get(1).setRadius(0.2f);
+        this.particleSystem.get(1).setMaxParticleCount(200);
         particleSystemDef.delete();
 
         this.contactListener = new ContactListener();
@@ -156,7 +162,7 @@ public class GameWorld {
         return jointDaDistruggere;
     }
     public static synchronized boolean getOggettiVecchiDaDistruggere(){ return oggettiVecchiDaDistruggere;}
-    public ParticleSystem getParticleSystem() {return this.particleSystem;}
+    public ParticleSystem getParticleSystem(int i) {return this.particleSystem.get(i);}
     public static boolean getProntoProssimoLivello(){ return prontoProssimoLivello;}
     public static int getLivello(){ return livello;}
 

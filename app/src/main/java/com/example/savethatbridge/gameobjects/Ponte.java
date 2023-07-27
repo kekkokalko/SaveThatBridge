@@ -20,7 +20,7 @@ public class Ponte extends GameObject {
 
     private float screen_semi_width;
     private float screen_semi_height;
-    private boolean haAggancio = false;
+    private float larghezza;
 
     public Ponte(GameWorld gw, float x, float y, float larghezza, float altezza)
     {

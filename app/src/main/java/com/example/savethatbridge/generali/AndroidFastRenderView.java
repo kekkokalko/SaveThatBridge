@@ -158,14 +158,15 @@ public class AndroidFastRenderView extends SurfaceView implements Runnable {
             if(fpsDeltaTime>1){
                 GameWorld.timerBomba--;
                 if(GameWorld.getBombe()!=null && GameWorld.timerBomba==0){
-                    int index=size-1;
+                    int index=0,i=0;
                     do{
-                        ((Bomba)GameWorld.getBombe().get(index)).esplosione();
+                        ((Bomba)GameWorld.getBombe().get(index)).esplosione(i);
+                        Log.d("MEssage", "E' esplosa la bomba in posizione " + index + " su " + GameWorld.getBombe().size());
                         this.gameWorld.rimuoviOggetto(GameWorld.getBombe().get(index));
                         GameWorld.getBombe().remove(index);
-                        index--;
+                        i++;
                     }
-                    while(index==0);
+                    while(index<GameWorld.getBombe().size());
                     GameWorld.setOggettiVecchiDaDistruggere(false);
                     fineGioco=false;
                     verificaLivello=true;

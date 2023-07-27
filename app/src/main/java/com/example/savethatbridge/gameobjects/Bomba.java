@@ -7,12 +7,15 @@ import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.media.MediaPlayer;
+import android.provider.Telephony;
 import android.util.Log;
 
 import com.example.savethatbridge.R;
 import com.example.savethatbridge.generali.MyRevoluteJoint;
 import com.google.fpl.liquidfun.BodyDef;
 import com.google.fpl.liquidfun.BodyType;
+
+import java.util.ArrayList;
 
 public class Bomba extends GameObject{
     private final Canvas canvas;
@@ -23,6 +26,7 @@ public class Bomba extends GameObject{
     private MediaPlayer mediaPlayer;
     private final float x, y;
     private Context context;
+    private static Particelle p;
 
     public Bomba(Context context,GameWorld gameWorld, float x , float y, MyRevoluteJoint jointDaDistruggere) {
         super(gameWorld);
@@ -50,7 +54,7 @@ public class Bomba extends GameObject{
         bodyDef.delete();
     }
 
-    public synchronized void esplosione(){
+    public synchronized void esplosione(int i){
         //Gestione musica
         mediaPlayer= MediaPlayer.create(this.context, R.raw.esplosione);
         mediaPlayer.start();
@@ -60,8 +64,8 @@ public class Bomba extends GameObject{
         GameWorld.getJoint().remove(this.joint);
         GameWorld.setOggettiVecchiDaDistruggere(false);
         //Aggiunta particelle dall'esplosione (Da completare)
-        Particelle particelle= new Particelle(this.gw, this.x,this.y);
-        this.gw.aggiungiOggetto(particelle);
+        p= new Particelle(this.gw, i, this.x,this.y);
+        this.gw.aggiungiOggetto(p);
         //Annulla il joint
         this.joint = null;
     }

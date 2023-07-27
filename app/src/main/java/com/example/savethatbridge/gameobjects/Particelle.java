@@ -19,11 +19,11 @@ import java.nio.ByteOrder;
 public class Particelle extends GameObject {
     private final Canvas canvas;
     private final ParticleSystem particleSystem;
-    private final ParticleGroup particleGroup;
-    private final byte[] posizioneParticelle;
-    private final ByteBuffer posizioneParticelleBuffer;
+    private ParticleGroup particleGroup;
+    private byte[] posizioneParticelle;
+    private ByteBuffer posizioneParticelleBuffer;
     private final Paint paint = new Paint();
-    private static final int PARTICLE_BYTES = 256;
+    private static final int PARTICLE_BYTES = 128;
     private static int BUFFER_OFFSET;
     private static boolean isLittleEndian;
 
@@ -31,19 +31,18 @@ public class Particelle extends GameObject {
         discoverEndianness();
     }
 
-    public Particelle(GameWorld gw, float x, float y) {
+    public Particelle(GameWorld gw, int i,float x, float y) {
         super(gw);
 
         this.canvas = new Canvas(gw.getBitmapBuffer());
-        this.particleSystem = gw.getParticleSystem();
+        this.particleSystem = gw.getParticleSystem(i);
 
         CircleShape circleShape = new CircleShape();
         circleShape.setRadius(2);
-        circleShape.setPosition(x+2, y);
 
         ParticleGroupDef particleGroupDef = new ParticleGroupDef();
         particleGroupDef.setShape(circleShape);
-        particleGroupDef.setPosition(x, y);
+        particleGroupDef.setPosition(x,y);
         particleGroupDef.setGroupFlags(ParticleGroupFlag.solidParticleGroup);
         particleGroupDef.setFlags(ParticleFlag.powderParticle);
         particleGroupDef.setLifetime(3);

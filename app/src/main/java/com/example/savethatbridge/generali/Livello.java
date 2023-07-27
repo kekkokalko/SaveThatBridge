@@ -178,7 +178,6 @@ public class Livello {
      float larghezzaGancio= lunghezzaPonte/numeroAgganci;
      //Definizione di un'ArrayList di numeroAgganci+anchors elementi
      GameWorld.joint = new ArrayList<>(anchors+numeroAgganci);
-     GameWorld.joint.clear();
      //Creazione joint tra la 1° collina e il primo aggancio del ponte
      MyRevoluteJoint joint = new MyRevoluteJoint(gameWorld, GameWorld.colline.get(0).body, GameWorld.ponte.get(0).body, -larghezzaGancio / 2, -altezzaAggancio / 2, (((Collina) GameWorld.colline.get(0)).getWidth() / 2), -(((Collina) GameWorld.colline.get(0)).getHeight()/2));
      GameWorld.joint.add(joint);
