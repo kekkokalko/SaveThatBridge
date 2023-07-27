@@ -20,7 +20,6 @@ public class Vespa extends GameObject{
     private static float screen_semi_width, screen_semi_height;
 
     private final Canvas canvas;
-    private final Paint paint = new Paint();
     private final RectF dest = new RectF();
     private final Bitmap bitmap;
     private Context context;
