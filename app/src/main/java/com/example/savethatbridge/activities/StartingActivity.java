@@ -56,8 +56,8 @@ public class StartingActivity extends Activity {
         setContentView(this.renderView);
 
         //Audio
-        //backgroundMusic = MediaPlayer.create(this, R.raw.game_music_background);
-        //backgroundMusic.setLooping(true);
+        backgroundMusic = MediaPlayer.create(this, R.raw.game_music_background);
+        backgroundMusic.setLooping(true);
 
         //Touch
         MultiTouchHandler touch = new MultiTouchHandler(this.renderView, 1, 1);
@@ -92,7 +92,7 @@ public class StartingActivity extends Activity {
         super.onResume();
         Log.i("Main thread", "resume");
         this.renderView.resume();
-        //this.backgroundMusic.start();
+        this.backgroundMusic.start();
     }
     @Override
     public void onBackPressed() {

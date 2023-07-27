@@ -24,6 +24,7 @@ public class Vespa extends GameObject{
     private final RectF dest = new RectF();
     private final Bitmap bitmap;
     private Context context;
+    private static MediaPlayer mediaPlayer;
 
     public Vespa(Context context, GameWorld gameWorld, float x, float y) {
         super(gameWorld);
@@ -55,6 +56,7 @@ public class Vespa extends GameObject{
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inScaled = false;
         this.bitmap = BitmapFactory.decodeResource(gw.getActivity().getResources(), R.drawable.civile, options);
+        mediaPlayer=MediaPlayer.create(this.context,R.raw.caduta);
 
         // clean up native objects
         fixturedef.delete();
@@ -66,6 +68,9 @@ public class Vespa extends GameObject{
     public void draw(Bitmap buf, float x, float y, float angle) {
         this.canvas.save();
         this.canvas.rotate((float) Math.toDegrees(angle), x, y);
+
+        if(this.body.getPositionY()>=0.5f)
+            mediaPlayer.start();
         this.dest.left = x - screen_semi_width;
         this.dest.bottom = y + screen_semi_height;
         this.dest.right = x + screen_semi_width;
