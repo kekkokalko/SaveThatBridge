@@ -10,6 +10,7 @@ import com.example.savethatbridge.DragMeImpl.Input.TouchEvent;
 import com.example.savethatbridge.DragMeImpl.Pool;
 import com.example.savethatbridge.DragMeImpl.Pool.PoolObjectFactory;
 
+/**Classe usata per la gestione dei multipli eventi touch**/
 public class MultiTouchHandler implements TouchHandler {
     boolean[] isTouching = new boolean[20];
     int[] touchX = new int[20];
@@ -35,6 +36,7 @@ public class MultiTouchHandler implements TouchHandler {
         this.scaleY = scaleY;
     }
 
+    /**Metodo che effettua la conversione tra gli eventi Android MotionEvent in uno o più semplici touchEvent**/
     @Override
     public synchronized boolean onTouch(View v, MotionEvent event) {
         int action = event.getActionMasked();
@@ -115,6 +117,13 @@ public class MultiTouchHandler implements TouchHandler {
             return touchY[pointer];
     }
 
+    /**Metodo che usufruisce di 2 liste, efficiente in quanto non effettua continue allocazione per ogni evento;
+     Usufruisce di 2 liste che vengono continuamente riciclate;
+     Mette in un pool tutti gli eventi touch avvenuti;
+     Svuota la lista vecchia degli eventi che sono stati già gestiti;
+     Fa lo swap delle  liste;
+     E' un metoto sincronizzato, impedisce a più chiamate che arrivano da diversi thread di rimanere bloccate o crashare
+     **/
     @Override
     public synchronized List<TouchEvent> getTouchEvents() {
         // empty the old list and return the events to the pool

@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import com.example.savethatbridge.generali.Box;
 import com.google.fpl.liquidfun.Body;
 
+/**Classe GameObject, definisce un oggetto nel mondo**/
 public abstract class GameObject {
     public Body body;
     public String name;
@@ -16,6 +17,8 @@ public abstract class GameObject {
         this.gw = gw;
     }
 
+    /**Metodo concreto per il disegno di un oggetto. Richiama draw astratto (Pattern Template method). Questo perchè c'è un pezzo di metodo che è unico per tutti e un altro che è
+     soggettivo per ogni oggetto delle varie sottoclassi.**/
     public boolean draw(Bitmap buffer) {
         if (this.body != null) {
             // Physical position of the center
@@ -29,6 +32,7 @@ public abstract class GameObject {
                 // Screen position
                 float screen_x = this.gw.setWorldToFrameX(x);
                 float screen_y = this.gw.setWorldToFrameY(y);
+                //richiamo del metodo astratto. Permette il disegno delle specifiche carattaristiche degli oggetti specifici
                 this.draw(buffer, screen_x, screen_y, angle);
                 return true;
             } else return false;

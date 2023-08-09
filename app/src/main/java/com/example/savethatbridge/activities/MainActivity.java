@@ -15,6 +15,8 @@ import android.widget.ImageButton;
 
 import com.example.savethatbridge.R;
 
+
+/**Attività di apertura del gioco**/
 public class MainActivity extends Activity {
 
     private Button nuova_partita,esci;

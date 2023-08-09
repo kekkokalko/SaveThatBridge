@@ -3,7 +3,6 @@ package com.example.savethatbridge.gameobjects;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Rect;
 import android.graphics.RectF;
 
 import com.example.savethatbridge.R;
@@ -12,6 +11,7 @@ import com.google.fpl.liquidfun.BodyType;
 import com.google.fpl.liquidfun.FixtureDef;
 import com.google.fpl.liquidfun.PolygonShape;
 
+/**Classe che definisce la trave di supporto**/
 public class Trave extends GameObject{
     private final Canvas canvas;
     private final Bitmap bitmap;

@@ -3,7 +3,6 @@ package com.example.savethatbridge.generali;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.media.MediaPlayer;
-import android.util.Log;
 
 import com.example.savethatbridge.R;
 import com.example.savethatbridge.gameobjects.Aggancio;
@@ -19,6 +18,7 @@ import com.example.savethatbridge.gameobjects.Terrorista;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**CLasse che dinisce un livello**/
 public class Livello {
 
     private static Box physicalSize;
@@ -97,6 +97,7 @@ public class Livello {
         aggiungiCaratteristiche(world);
     }
 
+    /**Metodo che aggiunge l'interfaccia e il sound**/
     private void aggiungiCaratteristiche(GameWorld world) {
         mediaPlayer=MediaPlayer.create(this.context,R.raw.applausi);
         mediaPlayer.start();
@@ -123,12 +124,11 @@ public class Livello {
             default:
                 throw new IllegalArgumentException("Livello invalido: " + livello);
         }
-
         GameWorld.setCostruire(true);
-        GameWorld.setBordo(world.aggiungiOggetto(new EnclosureGO(world, physicalSize.getxMin(), physicalSize.getxMax(), physicalSize.getyMin(), physicalSize.getyMax())));
+        GameWorld.setBordo(world.aggiungiOggetto(new Bordo(world, physicalSize.getxMin(), physicalSize.getxMax(), physicalSize.getyMin(), physicalSize.getyMax())));
     }
 
-    /**Aggiunta interfaccia con i suoi ocntatori**/
+    /**Aggiunta interfaccia con i suoi contatori**/
     private void aggiuntaInterfaccia(GameWorld world) {
         Interfaccia interfaccia= new Interfaccia(world);
         interfaccia.setContatoreLivello(GameWorld.getLivello());

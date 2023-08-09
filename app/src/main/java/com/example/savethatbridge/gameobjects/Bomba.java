@@ -4,19 +4,15 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Paint;
 import android.graphics.RectF;
 import android.media.MediaPlayer;
-import android.provider.Telephony;
-import android.util.Log;
 
 import com.example.savethatbridge.R;
 import com.example.savethatbridge.generali.MyRevoluteJoint;
 import com.google.fpl.liquidfun.BodyDef;
 import com.google.fpl.liquidfun.BodyType;
 
-import java.util.ArrayList;
-
+/**Classe che definisce una bomba**/
 public class Bomba extends GameObject{
     private final Canvas canvas;
     private final Bitmap bitmap;
@@ -41,10 +37,14 @@ public class Bomba extends GameObject{
         this.screenSemiHeight = gameWorld.toPixelsYLength(dimensione) / 2;
         this.screenSemiWidth = gameWorld.toPixelsXLength(dimensione) / 2;
 
-        BodyDef bodyDef = new BodyDef();
-        bodyDef.setPosition(x, y);
+        //Deinizione di un body
+        BodyDef bodyDef=new BodyDef();
+        //definizione della posizione
+        bodyDef.setPosition(x,y);
+        //definizione della tipologia di body
         bodyDef.setType(BodyType.staticBody);
 
+        //Creazione del corpo e del suo user data
         this.body = gameWorld.getWorld().createBody(bodyDef);
         this.body.setSleepingAllowed(true);
 
@@ -54,23 +54,28 @@ public class Bomba extends GameObject{
         bodyDef.delete();
     }
 
+    /**Metodo di gestione dell'esplosione della bomba**/
     public synchronized void esplosione(int i){
         //Gestione musica
         mediaPlayer= MediaPlayer.create(this.context, R.raw.esplosione);
         mediaPlayer.start();
-        //Seleziona il joint da distruggere
+        //Seleziona il joint da distruggere e aggiunta nella lista di quelli da eliminare
         GameWorld.getJointDaDistruggere().add(this.joint.getJoint());
         //Rimuovilo da quelli disponibili sul ponte
         GameWorld.getJoint().remove(this.joint);
+        //Permetti la distruzione dei corpi selezioni
         GameWorld.setOggettiVecchiDaDistruggere(false);
-        //Aggiunta particelle dall'esplosione (Da completare)
+        //Istanzia particelle dall'esplosione
         p= new Particelle(this.gw, i, this.x,this.y);
+        //Aggiunta particelle nel mondo
         this.gw.aggiungiOggetto(p);
         //Annulla il joint
         this.joint = null;
     }
+
     @Override
     public void draw(Bitmap buf, float x, float y, float angle) {
+        //Salvataggio della canvas e modifiche conseguenti
         this.canvas.save();
         this.dest.top = y - 2 * this.screenSemiHeight;
         this.dest.bottom = y;

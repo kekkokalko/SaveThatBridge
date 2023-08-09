@@ -12,6 +12,7 @@ import com.google.fpl.liquidfun.BodyType;
 import com.google.fpl.liquidfun.FixtureDef;
 import com.google.fpl.liquidfun.PolygonShape;
 
+/**Classe che definisce il ponte del gioco**/
 public class Ponte extends GameObject {
 
     private final Canvas canvas;
@@ -20,7 +21,6 @@ public class Ponte extends GameObject {
 
     private float screen_semi_width;
     private float screen_semi_height;
-    private float larghezza;
 
     public Ponte(GameWorld gw, float x, float y, float larghezza, float altezza)
     {
@@ -30,17 +30,21 @@ public class Ponte extends GameObject {
         this.screen_semi_width = gw.toPixelsXLength(larghezza)/ 2;
         this.screen_semi_height=gw.toPixelsYLength(altezza)/2;
 
+        //Definiizione del body, posizione e tipo
         BodyDef bodydef=new BodyDef();
         bodydef.setPosition((x+larghezza/2),y);
         bodydef.setType(BodyType.dynamicBody);
 
+        //Creazione del body, disattivazione dello sleeping mode e settaggio user data
         this.body=gw.getWorld().createBody(bodydef);
         this.body.setSleepingAllowed(false);
         this.body.setUserData(this);
 
+        //Settaggio shape
         PolygonShape polygonShape = new PolygonShape();
         polygonShape.setAsBox(larghezza / 2, altezza / 2);
 
+        //Settaggio fixture e caratteristiche conseguenti
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.setShape(polygonShape);
         fixtureDef.setFriction(0.1f);
@@ -63,7 +67,7 @@ public class Ponte extends GameObject {
         this.rect.bottom = y + screen_semi_height;
         this.rect.right = x + screen_semi_width;
         this.rect.top = y - screen_semi_height;
-        // Sprite
+        //Disegno dello sprite
         this.canvas.drawBitmap(this.bitmap, null, this.rect, null);
         Paint paint = new Paint();
         paint.setARGB(255,92, 51, 23);

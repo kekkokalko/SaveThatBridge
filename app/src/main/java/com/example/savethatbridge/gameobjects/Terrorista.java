@@ -14,6 +14,7 @@ import com.google.fpl.liquidfun.BodyDef;
 import com.google.fpl.liquidfun.BodyType;
 import com.google.fpl.liquidfun.Vec2;
 
+/**Classe che definisce il terrorista del gioco**/
 public class Terrorista extends GameObject{
     private final Canvas canvas;
     private final Bitmap bitmap;
@@ -27,6 +28,7 @@ public class Terrorista extends GameObject{
 
     public Terrorista(Context context,GameWorld gw, float x, float y){
         super(gw);
+        //grandezza visiva
         int altezza=3;
         int larghezza=3;
         this.context=context;
@@ -39,10 +41,11 @@ public class Terrorista extends GameObject{
         BodyDef bodyDef = new BodyDef();
         bodyDef.setPosition(x, y);
         bodyDef.setType(BodyType.kinematicBody);
-        bodyDef.setLinearVelocity(new Vec2((float) 5, 0)); //definisce la velocità del corpo
+        //definizione della velocità del corpo
+        bodyDef.setLinearVelocity(new Vec2((float) 5, 0));
 
         this.body = gw.getWorld().createBody(bodyDef);
-        this.body.setSleepingAllowed(true);
+        this.body.setSleepingAllowed(false);
 
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inScaled = false;
@@ -85,6 +88,7 @@ public class Terrorista extends GameObject{
         this.sprite = (this.sprite + 1) % 8;
     }
 
+    /**Metodo che controlla quando disegnare le bombe a seconda della posizione del terrorista**/
     private void controlloBomba(){
         for(int i=0;i<GameWorld.getBombe().size();i++)
             if(this.body.getPositionX()>GameWorld.getBombe().get(i).body.getPositionX()){

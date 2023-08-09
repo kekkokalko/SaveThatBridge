@@ -16,6 +16,7 @@ import com.google.fpl.liquidfun.ParticleSystem;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
+/**Definizione classe delle particelle, corpi rigidi senza orientamento**/
 public class Particelle extends GameObject {
     private final Canvas canvas;
     private final ParticleSystem particleSystem;
@@ -35,33 +36,39 @@ public class Particelle extends GameObject {
         super(gw);
 
         this.canvas = new Canvas(gw.getBitmapBuffer());
+        //Ottenimento del sistema di particelle creato e istanziato nel gameworld
         this.particleSystem = gw.getParticleSystem(i);
 
+        //Definizione della forma delle particelle: circolari di raggio 2
         CircleShape circleShape = new CircleShape();
         circleShape.setRadius(2);
 
+        //Creazione del gruppo di particelle avente una certa shape, una posizione, di una certa consistenza e  tempo di vita
         ParticleGroupDef particleGroupDef = new ParticleGroupDef();
         particleGroupDef.setShape(circleShape);
         particleGroupDef.setPosition(x,y);
         particleGroupDef.setGroupFlags(ParticleGroupFlag.solidParticleGroup);
         particleGroupDef.setFlags(ParticleFlag.powderParticle);
         particleGroupDef.setLifetime(3);
-
         this.particleGroup = this.particleSystem.createParticleGroup(particleGroupDef);
+
 
         this.posizioneParticelleBuffer = ByteBuffer.allocateDirect(this.particleGroup.getParticleCount() * PARTICLE_BYTES);
         this.posizioneParticelle = this.posizioneParticelleBuffer.array();
 
 
+        //rilascio degli oggetti nativi
         circleShape.delete();
         particleGroupDef.delete();
     }
 
     @Override
     public void draw(Bitmap buffer, float _x, float _y, float _angle) {
+        //Con una sola invocazione a LiquidFun riporta nel mondo Java le coordinate di tutte le particelle e le copia nel buffer 'posizioneParticelleBuffer'
         particleSystem.copyPositionBuffer(0, this.particleGroup.getParticleCount(), posizioneParticelleBuffer);
 
         paint.setARGB(255, 150, 150, 150);
+        //Ciclo che gestisce le posizioni delle singole particelle tramite la loro posizione, lavorando esplicitamente sui bit
         for (int i = 0; i < this.particleGroup.getParticleCount() / 2; i++) {
             int xint, yint;
             if (isLittleEndian) {
@@ -133,6 +140,7 @@ public class Particelle extends GameObject {
             }
 
             float x = Float.intBitsToFloat(xint), y = Float.intBitsToFloat(yint);
+            //Disegno dei cerchi
             canvas.drawCircle(gw.setWorldToFrameX(x), gw.setWorldToFrameY(y), 4, paint);
         }
     }

@@ -5,6 +5,7 @@ import com.google.fpl.liquidfun.Body;
 import com.google.fpl.liquidfun.Joint;
 import com.google.fpl.liquidfun.RevoluteJointDef;
 
+/**Classe che definisce un joint rotazionale senza motore**/
 public class MyRevoluteJoint {
     private final Joint joint;
 

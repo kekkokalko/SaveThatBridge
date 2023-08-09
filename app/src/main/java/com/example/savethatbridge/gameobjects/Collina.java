@@ -10,8 +10,7 @@ import com.google.fpl.liquidfun.BodyDef;
 import com.google.fpl.liquidfun.BodyType;
 import com.google.fpl.liquidfun.PolygonShape;
 
-import java.util.logging.Level;
-
+/**Classe che definisce una collina ad un lato del ponte**/
 public class Collina extends GameObject{
     private static int istanza = 0;
     private float larghezzaShape;
@@ -33,7 +32,7 @@ public class Collina extends GameObject{
         BodyDef bodyDef= new BodyDef();
         bodyDef.setPosition(xMin+larghezzaShape/2,yMin+altezzaShape/2);
 
-        //Un body
+
         this.body=gw.getWorld().createBody(bodyDef);
         this.body.setType(BodyType.staticBody);
         this.name="Collina"+istanza;
@@ -51,6 +50,7 @@ public class Collina extends GameObject{
         else
             this.bitmap = BitmapFactory.decodeResource(gw.getActivity().getResources(), R.drawable.road2, o);
 
+        //Settaggio grandezza e posizione del rettangolo contenente la collina
         this.dest.top= 200; this.dest.bottom=400;
         if(xMinRoad>0){
             this.dest.left = 500;

@@ -1,19 +1,11 @@
 package com.example.savethatbridge.generali;
 
 import android.content.Context;
-import android.content.res.AssetFileDescriptor;
-import android.content.res.AssetManager;
-import android.media.AudioAttributes;
-import android.media.AudioManager;
 import android.media.MediaPlayer;
-import android.media.SoundPool;
-import android.os.Build;
-import android.provider.MediaStore;
 import android.util.Log;
 
 import com.example.savethatbridge.DragMeImpl.Input;
 import com.example.savethatbridge.R;
-import com.example.savethatbridge.activities.StartingActivity;
 import com.example.savethatbridge.gameobjects.Aggancio;
 import com.example.savethatbridge.gameobjects.GameObject;
 import com.example.savethatbridge.gameobjects.GameWorld;
@@ -23,9 +15,7 @@ import com.google.fpl.liquidfun.Fixture;
 import com.google.fpl.liquidfun.MouseJoint;
 import com.google.fpl.liquidfun.QueryCallback;
 
-import java.io.FileDescriptor;
-import java.io.IOException;
-
+/**Classe che definisce l'azione da intraprendere al tocco sullo schermo**/
 public class TouchConsumer {
     private GameObject oggetto;
     private final GameWorld gameWorld;

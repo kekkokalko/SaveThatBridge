@@ -18,6 +18,7 @@ import com.example.savethatbridge.generali.Box;
 import com.example.savethatbridge.gameobjects.GameWorld;
 import com.example.savethatbridge.R;
 
+/**Attività che permette la visualizzazione della partita**/
 public class StartingActivity extends Activity {
 
     private int xMax, xMin, yMax, yMin;
@@ -41,7 +42,7 @@ public class StartingActivity extends Activity {
         //Schermo sempre accesso
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
-        // caricamento constanti
+        //caricamento constanti grandezza schermo
         Resources resources = this.getResources();
         this.xMax = resources.getInteger(R.integer.worldXMax);
         this.xMin = resources.getInteger(R.integer.worldXMin);
@@ -51,7 +52,7 @@ public class StartingActivity extends Activity {
         //settaggio game-world
         setupGameWorld();
 
-        // View
+        //Vista di tipo superficie custom che occuperà tutto lo schermo
         this.renderView = new AndroidFastRenderView(this,gameWorld);
         setContentView(this.renderView);
 
@@ -65,8 +66,11 @@ public class StartingActivity extends Activity {
     }
 
     private void setupGameWorld() {
+        //Ottenimento parametri dello schermo
         DisplayMetrics metrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+        //Settaggio grandezza schermo e dimensioni del mondo
         Box worldSize = new Box(this.xMin, this.yMin, this.xMax, this.yMax);
         Box screenSize = new Box(0, 0, metrics.widthPixels, metrics.heightPixels);
         this.gameWorld = new GameWorld(this,worldSize, screenSize, this);

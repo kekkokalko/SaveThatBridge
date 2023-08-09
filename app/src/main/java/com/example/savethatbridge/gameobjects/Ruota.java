@@ -11,6 +11,7 @@ import com.google.fpl.liquidfun.BodyType;
 import com.google.fpl.liquidfun.CircleShape;
 import com.google.fpl.liquidfun.FixtureDef;
 
+/**Definizione della classe che rappresenta una ruota**/
 public class Ruota extends GameObject{
     static final float larghezza = 0.6f, altezza = 0.6f, densità = 0.7f;
     private static float screen_semi_width, screen_semi_height;

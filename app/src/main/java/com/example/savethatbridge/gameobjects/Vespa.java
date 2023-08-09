@@ -4,8 +4,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.RectF;
 import android.media.MediaPlayer;
 
@@ -15,6 +13,7 @@ import com.google.fpl.liquidfun.BodyType;
 import com.google.fpl.liquidfun.FixtureDef;
 import com.google.fpl.liquidfun.PolygonShape;
 
+/**Classe che definisce la carrozzeria della vespa**/
 public class Vespa extends GameObject{
     static final float larghezza = 2.5f, altezza = 1.5f;
     private static float screen_semi_width, screen_semi_height;
@@ -39,7 +38,7 @@ public class Vespa extends GameObject{
 
         this.body = gameWorld.getWorld().createBody(bdef);
         this.body.setSleepingAllowed(false);
-        this.name = "Voiture";
+        this.name = "Vespa";
         this.body.setUserData(this);
 
         PolygonShape polygonShape = new PolygonShape();
@@ -68,8 +67,9 @@ public class Vespa extends GameObject{
         this.canvas.save();
         this.canvas.rotate((float) Math.toDegrees(angle), x, y);
 
-        if(this.body.getPositionY()>=0.8f)
+        if(this.body.getPositionY()>=1)
             mediaPlayer.start();
+        
         this.dest.left = x - screen_semi_width;
         this.dest.bottom = y + screen_semi_height;
         this.dest.right = x + screen_semi_width;

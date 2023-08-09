@@ -9,10 +9,11 @@ import com.google.fpl.liquidfun.BodyType;
 import com.google.fpl.liquidfun.PolygonShape;
 
 
-public class EnclosureGO extends GameObject {
+/**Definizione del bordo del gioco, oggetto che non ha fixture nè disegni**/
+public class Bordo extends GameObject {
     private static final float THICKNESS = 0;
 
-    public EnclosureGO(GameWorld gw, float leftX, float rightX, float bottomY, float topY) {
+    public Bordo(GameWorld gw, float leftX, float rightX, float bottomY, float topY) {
         super(gw);
 
         // a body definition: position and type
@@ -20,7 +21,7 @@ public class EnclosureGO extends GameObject {
 
         // a body, default position is (0,0) and default type is staticBody
         this.body = gw.getWorld().createBody(bodyDef);
-        this.name = "EnclosureGO";
+        this.name = "Bordo";
         this.body.setUserData(this);
         this.body.setType(BodyType.staticBody);
 
@@ -47,6 +48,6 @@ public class EnclosureGO extends GameObject {
     // draw enclosurego
     @Override
     public void draw(Bitmap buffer, float x, float y, float angle) {
-        // this method is empty since EnclosureGO does not need to be drawn
+        // this method is empty since Bordo does not need to be drawn
     }
 }

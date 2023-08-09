@@ -14,7 +14,7 @@ import android.widget.TextView;
 
 import com.example.savethatbridge.R;
 
-
+/**Attività che permette la visualizzazione dei riconoscimenti**/
 public class RiconoscimentiActivity extends Activity {
 
     private Button github,instagram,linkedin,github1,researchgate;
@@ -24,6 +24,7 @@ public class RiconoscimentiActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         //Settaggio full-screen
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);

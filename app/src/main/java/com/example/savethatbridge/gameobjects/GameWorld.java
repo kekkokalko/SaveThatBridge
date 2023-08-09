@@ -95,7 +95,6 @@ public class GameWorld {
         this.context=context;
 
         //Caricamento dimensioni del frameBuffer
-        Resources resorces = this.startingActivity.getResources();
         this.larghezzaBuffer = 600;
         this.altezzaBuffer = 400;
         this.frameBuffer = Bitmap.createBitmap(this.larghezzaBuffer, this.altezzaBuffer, Bitmap.Config.ARGB_8888);
@@ -185,16 +184,20 @@ public class GameWorld {
     public static void aggiungiBomba(GameObject bomba){ GameWorld.getBombe().add(bomba);}
 
     public synchronized void update(float elapsedTime) {
+        //avanzare la simulazione
         world.step(elapsedTime, VELOCITY_ITERATIONS, POSITION_ITERATIONS, PARTICLE_ITERATIONS);
         gestioneDistruzione();
 
-        //Gestione delle collisioni
+        //Gestione della posizione della vespa
         gestioneVespa();
 
-        //Aggorna i tocchi avvenuti
+        //Aggorna i tocchi avvenuti, si richiama touchHandler.getTouchEvents() per ottenere gli eventi
         for (Input.TouchEvent event : this.touchHandler.getTouchEvents())
+            //gli eventi verranno passati al touchCosumer che provvederà ad applicare le regole di gioco in risposta ai tocchi
             this.touchConsumer.consumeTouchEvent(event);
     }
+
+    /**Render permette il disegno dei vari oggetti creati sul framebuffer**/
     public synchronized void render(){
         this.myCanvas.save();
         this.myCanvas.drawBitmap(this.bitmap, null, dest, null);
@@ -226,11 +229,13 @@ public class GameWorld {
         }
     }
 
+    /**Metodo per la rimozione di liste di GameObject**/
     private void rimuoviListeDiOggetti(ArrayList<GameObject> oggetti) {
         for (GameObject oggetto : oggetti)
             this.rimuoviOggetto(oggetto);
     }
 
+    /**Metodo che elimina tutto. Lo si richiama al passaggio da un livello ad un altro o quando c'è la ripetizione del livello**/
     public void rimuoviVecchiOggetti() {
         rimuoviListeDiOggetti(colline);
         rimuoviListeDiOggetti(ponte);
@@ -245,11 +250,13 @@ public class GameWorld {
         prontoProssimoLivello=false;
     }
 
+    /**Metodo che aggiunge un joint alla lista di quelli che devono essere elininati**/
     private void aggiungiJointDaDistruggere(ArrayList<MyRevoluteJoint> joints) {
         for (MyRevoluteJoint joint : joints)
             jointDaDistruggere.add(joint.getJoint());
     }
 
+    /**Metodo che da il consenso ad eliminare GameObject e Joint**/
     private void gestioneDistruzione(){
         if(!getOggettiVecchiDaDistruggere()){
             distruggiJoint(jointDaDistruggere);
@@ -260,9 +267,11 @@ public class GameWorld {
         }
     }
 
+    /**Metodo che gestisce la posizione della vespa nel passaggio del ponte**/
     public void gestioneVespa(){
         if(!ruote.isEmpty() && vespa!=null){
             if(!verifica) {
+                //Se la vespa ha superato il ponte, segnalalo ed eliminala
                 if (this.ruote.get(0).body.getPositionX() > this.getPhysicalSize().getxMax() - 2 || this.ruote.get(1).body.getPositionX() > this.getPhysicalSize().getxMax() - 2 || this.vespa.body.getPositionX() > this.getPhysicalSize().getxMax() - 2) {
                     verifica = true;
                     Log.d("Messagge", "La vespa ha superato il ponte");
@@ -271,6 +280,7 @@ public class GameWorld {
                     setOggettiVecchiDaDistruggere(false);
                     mediaPlayer.pause();
                 }
+                //Se la vespa cade nel burrone, segnalalo ed eliminala
                 else if (this.ruote.get(0).body.getPositionY() > this.getPhysicalSize().getyMax() - 2 || this.ruote.get(1).body.getPositionY() > this.getPhysicalSize().getyMax() - 2 || this.vespa.body.getPositionY() > this.getPhysicalSize().getyMax() - 2) {
                     verifica = true;
                     Log.d("Messagge", "La vespa è caduta giù dal ponte");
@@ -283,12 +293,15 @@ public class GameWorld {
     }
 
     public static synchronized void incrementaLivello(){ livello++;}
+
+    /**Metodo per l'eliminazione dei joint nella lista addetta**/
     private void distruggiJoint(List<Joint> joints) {
         for (Joint joint : joints)
             this.world.destroyJoint(joint);
         joints.clear();
     }
 
+    /**Metodo per la distruzione di GameObject**/
     private void distruggiBodies(List<Body> oggettiDaDistruggere) {
         for (Body body : oggettiDaDistruggere)
             this.world.destroyBody(body);
@@ -303,6 +316,7 @@ public class GameWorld {
         else gameLevel.endLevel(this);
     }
 
+    /**Metodo che aggiunge la vespa nel mondo con le sue componenti e vincoli**/
     public synchronized void checkLevel(){
         verifica=false;
         costruire=false;
@@ -338,8 +352,10 @@ public class GameWorld {
         float diffY=Math.abs(aggancioY-ponteY);
         float larghezza= (float)Math.sqrt(Math.pow(diffX,2)+Math.pow(diffY,2))-larghezzaAggancio/2;
 
+        //La larghezza della trave di rafforzamento non può essere >30
         if (larghezza >= 30) return;
 
+        //Settaggio inizio, fine e angolo della trave
         float x= Math.min(aggancioX,ponteX)+diffX/2;
         float y= Math.min(aggancioY,ponteY)+diffY/2;
         float angolo = (float) ((aggancioX < ponteX) ? Math.PI / 2 + Math.atan(diffX / diffY) : Math.PI / 2 - Math.atan(diffX / diffY));
@@ -348,6 +364,7 @@ public class GameWorld {
         this.aggiungiOggetto(rinforzo);
         trave.add(rinforzo);
 
+        //Aggiunta vincoli rotazionali tra i vari ganci all'inizio e alla fine della trave
         if (aggancioX < rinforzo.body.getPositionX() && aggancioY > rinforzo.body.getPositionY()) {
             joint.add(new MyRevoluteJoint(this, aggancio.body, rinforzo.body, diffX / 2 - larghezzaAggancio / 2, -diffY / 2 + larghezzaAggancio, larghezzaAggancio / 2, 0));
             joint.add(new MyRevoluteJoint(this, ponte.body, rinforzo.body, -diffX / 2 , -diffY / 2 + altezzaAggancio * 3 / 2, 0, altezzaAggancio));

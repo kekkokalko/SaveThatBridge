@@ -2,6 +2,7 @@ package com.example.savethatbridge.DragMeImpl;
 
 import java.util.List;
 
+/**Definizione interfaccia Input, usufruita per restituire tutti gli eventi che provengono dall'input tramite il metodo getTouchEvents()**/
 public interface Input {
     public static class KeyEvent {
         public static final int KEY_DOWN = 0;
@@ -22,14 +23,15 @@ public interface Input {
         }
     }
 
+    /**Classe addetta alla definizione delle 3 tipoloigie di eventi touch**/
     public static class TouchEvent {
         public static final int TOUCH_DOWN = 0;
         public static final int TOUCH_UP = 1;
         public static final int TOUCH_DRAGGED = 2;
 
-        public int type;
-        public int x, y;
-        public int pointer;
+        public int type; //tipo di evento
+        public int x, y; //coordinate del tocc
+        public int pointer;//indice del dito
 
         public String toString() {
             StringBuilder builder = new StringBuilder();

@@ -11,6 +11,7 @@ import com.google.fpl.liquidfun.BodyType;
 import com.google.fpl.liquidfun.FixtureDef;
 import com.google.fpl.liquidfun.PolygonShape;
 
+/**Classe che definisce le caratteristiche principali di un gancio**/
 public class Aggancio extends GameObject{
 
     private static final float larghezza=1.0f;
@@ -27,17 +28,22 @@ public class Aggancio extends GameObject{
         this.screen_semi_width = gw.toPixelsXLength(larghezza)/2;
         this.screen_semi_height = gw.toPixelsYLength(altezza)/2;
 
+        //Deinizione di un body
         BodyDef bodydef=new BodyDef();
+        //definizione della posizione
         bodydef.setPosition(x,y);
+        //definizione della tipologia di body
         bodydef.setType(BodyType.staticBody);
 
-
+        //Creazione del corpo e del suo user data
         this.body=gw.getWorld().createBody(bodydef);
         this.body.setUserData(this);
 
+        //Definizione della shape
         PolygonShape polygonShape = new PolygonShape();
         polygonShape.setAsBox(larghezza , altezza);
 
+        //Definiizione della fixture
         FixtureDef fixtureDef = new FixtureDef();
         fixtureDef.setShape(polygonShape);
         fixtureDef.setFriction(0f);
