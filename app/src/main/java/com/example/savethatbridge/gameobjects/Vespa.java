@@ -67,7 +67,7 @@ public class Vespa extends GameObject{
         this.canvas.save();
         this.canvas.rotate((float) Math.toDegrees(angle), x, y);
 
-        if(this.body.getPositionY()>=1)
+        if(this.body.getPositionY()>2)
             mediaPlayer.start();
         
         this.dest.left = x - screen_semi_width;
