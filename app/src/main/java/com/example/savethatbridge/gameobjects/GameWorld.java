@@ -278,7 +278,7 @@ public class GameWorld {
                     AndroidFastRenderView.vittoria = true;
                     AndroidFastRenderView.verificaVittoria = true;
                     setOggettiVecchiDaDistruggere(false);
-                    mediaPlayer.stop();
+                    mediaPlayer.pause();
                 }
                 //Se la vespa cade nel burrone, segnalalo ed eliminala
                 else if (this.ruote.get(0).body.getPositionY() > this.getPhysicalSize().getyMax() - 2 || this.ruote.get(1).body.getPositionY() > this.getPhysicalSize().getyMax() - 2 || this.vespa.body.getPositionY() > this.getPhysicalSize().getyMax() - 2) {
@@ -286,7 +286,7 @@ public class GameWorld {
                     Log.d("Messagge", "La vespa è caduta giù dal ponte");
                     AndroidFastRenderView.verificaVittoria = true;
                     setOggettiVecchiDaDistruggere(false);
-                    mediaPlayer.stop();
+                    mediaPlayer.pause();
                 }
             }
         }
@@ -323,7 +323,7 @@ public class GameWorld {
         ruote.clear();
         jointRuote.clear();
         mediaPlayer.start();
-        this.vespa=this.aggiungiOggetto(new Vespa(this.context,this,this.getPhysicalSize().getxMin()+2,-5));
+        this.vespa=this.aggiungiOggetto(new Vespa(this.context,this,this.getPhysicalSize().getxMin()+2,0));
         this.ruote.add(this.aggiungiOggetto(new Ruota(this,this.getPhysicalSize().getxMin()+2+Ruota.larghezza/2,-3)));
         this.ruote.add(this.aggiungiOggetto(new Ruota(this,this.getPhysicalSize().getxMin()+2+Ruota.larghezza/2,-3)));
         this.jointRuote.add(new MyRevoluteJointConMotore(this, vespa.body, ruote.get(0).body,0,0,-Vespa.larghezza/2+Ruota.larghezza/2, Vespa.altezza/2));

@@ -23,8 +23,9 @@ public class Particelle extends GameObject {
     private ParticleGroup particleGroup;
     private byte[] posizioneParticelle;
     private ByteBuffer posizioneParticelleBuffer;
+    private int particleCount;
     private final Paint paint = new Paint();
-    private static final int PARTICLE_BYTES = 128;
+    private static final int PARTICLE_BYTES = 1024;
     private static int BUFFER_OFFSET;
     private static boolean isLittleEndian;
 
@@ -52,7 +53,6 @@ public class Particelle extends GameObject {
         particleGroupDef.setLifetime(3);
         this.particleGroup = this.particleSystem.createParticleGroup(particleGroupDef);
 
-
         this.posizioneParticelleBuffer = ByteBuffer.allocateDirect(this.particleGroup.getParticleCount() * PARTICLE_BYTES);
         this.posizioneParticelle = this.posizioneParticelleBuffer.array();
 
@@ -65,7 +65,7 @@ public class Particelle extends GameObject {
     @Override
     public void draw(Bitmap buffer, float _x, float _y, float _angle) {
         //Con una sola invocazione a LiquidFun riporta nel mondo Java le coordinate di tutte le particelle e le copia nel buffer 'posizioneParticelleBuffer'
-        particleSystem.copyPositionBuffer(0, this.particleGroup.getParticleCount(), posizioneParticelleBuffer);
+        this.particleSystem.copyPositionBuffer(0, particleGroup.getParticleCount(), posizioneParticelleBuffer);
 
         paint.setARGB(255, 150, 150, 150);
         //Ciclo che gestisce le posizioni delle singole particelle tramite la loro posizione, lavorando esplicitamente sui bit
