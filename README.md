@@ -18,7 +18,8 @@ E' stata usufruita la libreria [JLiquidFun](https://github.com/mfaella/JLiquidFu
 
 ## Demo
 https://github.com/kekkokalko/SaveThatBridge/blob/main/Demo.avi
-[<img src="https://i.ytimg.com/vi/Hc79sDi3f0U/maxresdefault.jpg" width="50%">]
+(https://www.youtube.com/watch?v=Hc79sDi3f0U "Now in Android: 55")
+
 
 ### Team
 -Designer: [Francesco Calcopietro](https://github.com/kekkokalko)
