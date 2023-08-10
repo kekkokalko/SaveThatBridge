@@ -17,8 +17,7 @@ Nel 2° livello c'è la difficolta ulteriore di costuire le travi entro un tempo
 E' stata usufruita la libreria [JLiquidFun](https://github.com/mfaella/JLiquidFun) per la simulazione fisica.
 
 ## Demo
-https://github.com/kekkokalko/SaveThatBridge/blob/main/Demo.avi
-(https://www.youtube.com/watch?v=Hc79sDi3f0U "Now in Android: 55")
+https://github.com/kekkokalko/SaveThatBridge/assets/94131849/f66f2281-dae1-4b15-8606-0e319a8dc14a
 
 
 ### Team
