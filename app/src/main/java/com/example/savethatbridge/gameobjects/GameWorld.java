@@ -278,7 +278,7 @@ public class GameWorld {
                     AndroidFastRenderView.vittoria = true;
                     AndroidFastRenderView.verificaVittoria = true;
                     setOggettiVecchiDaDistruggere(false);
-                    mediaPlayer.pause();
+                    mediaPlayer.stop();
                 }
                 //Se la vespa cade nel burrone, segnalalo ed eliminala
                 else if (this.ruote.get(0).body.getPositionY() > this.getPhysicalSize().getyMax() - 2 || this.ruote.get(1).body.getPositionY() > this.getPhysicalSize().getyMax() - 2 || this.vespa.body.getPositionY() > this.getPhysicalSize().getyMax() - 2) {
@@ -286,7 +286,7 @@ public class GameWorld {
                     Log.d("Messagge", "La vespa è caduta giù dal ponte");
                     AndroidFastRenderView.verificaVittoria = true;
                     setOggettiVecchiDaDistruggere(false);
-                    mediaPlayer.pause();
+                    mediaPlayer.stop();
                 }
             }
         }

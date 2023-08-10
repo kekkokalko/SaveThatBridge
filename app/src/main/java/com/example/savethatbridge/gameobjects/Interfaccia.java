@@ -71,8 +71,8 @@ public class Interfaccia extends GameObject{
             this.canvas.drawText("Score : " + score.get(contatoreLivello-1), this.gw.getScreenSize().getxMax() / 38, this.gw.getScreenSize().getyMax() / 18, paint);
         }
         else{
-            this.canvas.drawText("Score 1° livello: " + score.get(0), this.gw.getScreenSize().getxMax() / 24, this.gw.getScreenSize().getyMax()/2.8f, paint);
-            this.canvas.drawText("Score 2° livello: " + score.get(1), this.gw.getScreenSize().getxMax() / 24, this.gw.getScreenSize().getyMax()/2.6f , paint);
+            this.canvas.drawText("Score 1° livello: " + score.get(0), this.gw.getScreenSize().getxMax() / 24, this.gw.getScreenSize().getyMax()/3.4f, paint);
+            this.canvas.drawText("Score 2° livello: " + score.get(1), this.gw.getScreenSize().getxMax() / 24, this.gw.getScreenSize().getyMax()/3 , paint);
         }
         this.canvas.restore();
     }
