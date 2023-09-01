@@ -5,7 +5,7 @@ import com.google.fpl.liquidfun.Body;
 import com.google.fpl.liquidfun.Joint;
 import com.google.fpl.liquidfun.RevoluteJointDef;
 
-/**Joint che definisce un joint rotazione con motore. Esso è applicato alle ruote della vespa con la carrozzeria**/
+/**Classe che definisce un joint rotazione con motore. Esso è applicato alle ruote della vespa con la carrozzeria**/
 public class MyRevoluteJointConMotore {
     Joint joint;
 
