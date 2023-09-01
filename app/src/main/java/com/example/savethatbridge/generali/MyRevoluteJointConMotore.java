@@ -17,7 +17,7 @@ public class MyRevoluteJointConMotore {
         jointDef.setLocalAnchorB(xb, yb);
         jointDef.setCollideConnected(true);
         jointDef.setEnableMotor(true);
-        jointDef.setMotorSpeed(22);
+        jointDef.setMotorSpeed(24);
         jointDef.setMaxMotorTorque(1500000);
         joint = gw.getWorld().createJoint(jointDef);
 
