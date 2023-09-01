@@ -1,7 +1,7 @@
 # SaveThatBridge
 
 <p align= "center">
-![alt text](https://github.com/kekkokalko/SaveThatBridge/assets/94131849/8cbf75b9-9bf1-4038-9812-33c050b4ade2)
+![logo](https://github.com/kekkokalko/SaveThatBridge/assets/94131849/8cbf75b9-9bf1-4038-9812-33c050b4ade2)
 
 
 ## Progetto di Game Design and Development - Università degli Studi di Napoli Federico II
