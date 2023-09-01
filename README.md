@@ -18,13 +18,13 @@ Nel 2° livello c'è la difficolta ulteriore di costuire le travi entro un tempo
 E' stata usufruita la libreria [JLiquidFun](https://github.com/mfaella/JLiquidFun) per la simulazione fisica.
 
 ## Demo
-
+https://github.com/kekkokalko/WeGetVax/assets/94131849/94ef2a9d-8aa4-40f3-aced-d4e710522a88
 
 
 ### Team
 -Designer: [Francesco Calcopietro](https://github.com/kekkokalko)
 
--Supervisor: Prof. [Marco Faella](https://github.com/mfaella)
+-Supervisor: [Prof. Marco Faella](https://github.com/mfaella)
 
 Anno Accademico 2022/2023
 
